@@ -135,3 +135,85 @@ Quit the server with CONTROL-C.
 If all has gone well so far, you should see NetBox! If not, make sure you have 'localhost' in ALLOWED_HOSTS.
 
 Running NetBox in this setup is not really suitable for production use, however.
+
+# Web Server
+## Web Server Installation
+We'll be using nginx, gunicorn and supervisord. You will want to replace "wings" with your Windows username throughout this section.
+
+## nginx Installation
+* Create the directory C:\nginx\
+* Visit http://nginx.org/en/download.html and download the latest Mainline version of nginx for Windows.
+* Extract it into C:\nginx (nginx.exe should be @ C:\nginx\nginx.exe)
+* Open C:\nginx\conf\nginx.conf in your favourite editor.
+* Replace the entire server {} block with the following:
+```
+server {
+    listen 80;
+
+    server_name localhost;
+
+    client_max_body_size 25m;
+
+    location /static/ {
+        alias C:/netbox/current/netbox/static/;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8001;
+        proxy_set_header X-Forwarded-Host $server_name;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header P3P 'CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM NAV"';
+    }
+}
+```
+* Save and exit the file
+* We'll come back to nginx later.
+
+## gunicorn Installation
+* Install gunicorn
+  * pip2 install gunicorn
+* Open C:\netbox\current\gunicorn_config.py in your favourite editor (note, it doesn't exist yet)
+```
+command = '/usr/bin/gunicorn'
+pythonpath = '/cygdrive/c/netbox/current/netbox'
+bind = '127.0.0.1:8001'
+workers = 4
+user = 'wings'
+```
+
+Again, we'll come back to gunicorn later.
+
+## supervisord Installation
+* Install supervisord
+  * pip2 install supervisor
+* Create conf and log directories
+```
+mkdir -p /etc/supervisor/conf.d
+mkdir -p /var/log/supervisor/
+```
+* Open /etc/supervisor/supervisord.conf with your favourite editor and fill it with the contents of this gist, then save...
+  * https://gist.github.com/Zorlin/4471e6609326390fc4d35c0502be1929
+  * TODO: clean this up a bit?
+* Open /etc/supervisor/conf.d/netbox.conf with your favourite editor (also doesn't exist yet), fill it with this and save...
+```
+[program:netbox]
+command = gunicorn -c /cygdrive/c/netbox/current/gunicorn_config.py netbox.wsgi
+directory = /cygdrive/c/netbox/current/
+user = wings
+```
+
+## Testing it all out
+* Boot up gunicorn via supervisord
+  * /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+* Visit localhost:8001 in your browser. If the page loads but has no styling, that's good, don't worry!
+* Go to C:\nginx and open nginx.exe either in the command line or file explorer. It should pop up a black window that immediately closes.
+* Visit localhost:80 in your browser. Everything should look perfect at this point. If so, congratulations!
+
+# Making it permanent - Services!
+Time to make your installation a bit more permanent. This will allow you to manage Nginx and Supervisord as services, allowing them to start on boot and other nice stuff.
+
+## nginx
+(Adapted from https://stackoverflow.com/questions/10061191/add-nginx-exe-as-windows-system-service-like-apache)
+* Grab the latest Windows Service Wrapper from GitHub - https://github.com/kohsuke/winsw/releases - you want one called WinSW.NET4.exe
+* Drag that into your C:\nginx directory and then rename it to nginxservice.exe
