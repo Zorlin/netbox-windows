@@ -85,9 +85,11 @@ netbox=>
 * Run the migrations
   * ./manage.py migrate
 ## Create a Super User
-`# ./manage.py createsuperuser
+```
+# ./manage.py createsuperuser
 Username: admin
 Email address: zorlin@gmail.com
 Password:
 Password (again):
 Superuser created successfully.`
+```
