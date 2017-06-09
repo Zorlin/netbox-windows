@@ -118,6 +118,7 @@ Installed 43 object(s) from 4 fixture(s)
 ```
 
 ## Test the Application
+* Start up NetBox in testing mode
 ```
  ./manage.py runserver 0.0.0.0:8000 --insecure
 Performing system checks...
@@ -128,3 +129,9 @@ Django version 1.11.2, using settings 'netbox.settings'
 Starting development server at http://0.0.0.0:8000/
 Quit the server with CONTROL-C.
 ```
+* Open your browser to http://localhost:8000/
+
+## Congratulations!
+If all has gone well so far, you should see NetBox! If not, make sure you have 'localhost' in ALLOWED_HOSTS.
+
+Running NetBox in this setup is not really suitable for production use, however.
