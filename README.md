@@ -44,7 +44,7 @@ netbox=>
 * Change directories to the place you just downloaded
   * eg: cd C:\Users\Zorlin\Downloads
 * Run the cygwin64 installer, asking it to install all required packages.
-  * setup-x86_64.exe -q -P wget,python2,python2-pip,libpq-devel,libpq5,zlib,zlib-devel,libjpeg8,libjpeg-devel
+  * setup-x86_64.exe -q -P wget,python2,python2-pip,automake,gcc,make,libpq-devel,libpq5,zlib,zlib-devel,libjpeg8,libjpeg-devel
 
   * Choose any Available Download Site and click Next
   * cygwin64 will automatically start installing dependencies of NetBox
