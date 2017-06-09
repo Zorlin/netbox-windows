@@ -14,6 +14,7 @@ Various reasons. I would like to eventually explore Bash on Windows and maybe po
 * Visit the PostgreSQL website for Windows - https://www.postgresql.org/download/windows/
 * Choose Interactive installer by EnterpriseDB - http://www.enterprisedb.com/products/pgdownload.do#windows
 * At the download page, choose the latest version of PostgreSQL and Windows x86-64, then hit Download Now.
+* Once the installer has finished downloading, run it. When prompted in the installer, set a nice superuser password you'll record or remember. Leave all other settings as defaults, but at the end do not choose to run Stack Builder at exit. Hit Finish.
 
 ## Database creation
 ## Test your connection
