@@ -266,4 +266,5 @@ Now visit localhost:80 and check that everything works. If it does, congratulati
 (This should still be considered experimental. For example, nginx on Windows is only in beta! Still, enjoy.)
 
 Hopefully your browser now looks like this :)
+
 ![A demo of NetBox on Windows in production mode](http://i.imgur.com/cGk0Xyb.png)
