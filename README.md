@@ -204,16 +204,63 @@ user = wings
 ```
 
 ## Testing it all out
+We're going to do a quick dry-run to make sure everything works.
+
 * Boot up gunicorn via supervisord
   * /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
 * Visit localhost:8001 in your browser. If the page loads but has no styling, that's good, don't worry!
 * Go to C:\nginx and open nginx.exe either in the command line or file explorer. It should pop up a black window that immediately closes.
 * Visit localhost:80 in your browser. Everything should look perfect at this point. If so, congratulations!
 
+If that worked, shut everything back off.
+* Switch to the Cygwin64 Terminal and STOP supervisord by hitting CTRL-C.
+* Kill any nginx processes that are running.
+
 # Making it permanent - Services!
-Time to make your installation a bit more permanent. This will allow you to manage Nginx and Supervisord as services, allowing them to start on boot and other nice stuff.
+Time to make your installation a bit more permanent. This will allow you to manage Nginx and Supervisord as services, allowing them to start on boot and other nice stuff. We will install and run supervisord first, then add nginx.
+
+## Install cygwin run service utility
+Before we proceed, we'll need to add a utility to cygwin called cygrunsrv.
+* In an administrator command prompt, go back to your Downloads folder
+* Re-run the cygwin installer with this command
+  * setup-x86_64.exe -q -P cygrunsrv
+
+## supervisord
+* In an administrator command prompt, go to C:\cygwin64\bin
+* Run this command to install supervisord as a service
+  * cygrunsrv --install supervisord --path /usr/bin/python --args "/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf"
+* We now need to revisit our configuration as it changes at this point - services run under the SYSTEM user.
+* Open /cygdrive/c/netbox/current/gunicorn_config.py and replace "wings" (or your user) with "SYSTEM".
+* Open /etc/supervisor/conf.d/netbox.conf and replace "wings" (or your user) with SYSTEM."
+* In an administrator command prompt, run NET START supervisord - hopefully the service will start successfully.
+* Test the service-ified supervisord by visiting localhost:8001. You should see an unstyled version of NetBox, like you did earlier.
 
 ## nginx
 (Adapted from https://stackoverflow.com/questions/10061191/add-nginx-exe-as-windows-system-service-like-apache)
 * Grab the latest Windows Service Wrapper from GitHub - https://github.com/kohsuke/winsw/releases - you want one called WinSW.NET4.exe
 * Drag that into your C:\nginx directory and then rename it to nginxservice.exe
+* With your favourite editor, open C:\nginx\nginxservice.xml. Fill it with this and save...
+```
+<service>
+  <id>nginx</id>
+  <name>nginx</name>
+  <description>nginx</description>
+  <executable>c:\nginx\nginx.exe</executable>
+  <logpath>c:\nginx\</logpath>
+  <logmode>roll</logmode>
+  <depend></depend>
+  <startargument>-p</startargument>
+  <startargument>c:\nginx</startargument>
+  <stopexecutable>c:\nginx\nginx.exe</stopexecutable>
+  <stopargument>-p</stopargument>
+  <stopargument>c:\nginx</stopargument>
+  <stopargument>-s</stopargument>
+  <stopargument>stop</stopargument>
+</service>
+```
+* Finally, as an administrator, CD to c:\nginx and run "nginxservice.exe install"
+* Run "net start nginx"
+
+Now visit localhost:80 and check that everything works. If it does, congratulations! You have a full NetBox install running on Windows.
+
+(This should still be considered experimental. For example, nginx on Windows is only in beta! Still, enjoy.)
