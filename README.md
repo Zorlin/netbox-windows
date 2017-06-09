@@ -44,8 +44,7 @@ netbox=>
 * Change directories to the place you just downloaded
   * eg: cd C:\Users\Zorlin\Downloads
 * Run the cygwin64 installer, asking it to install all required packages.
-  * setup-x86_64.exe -q -P wget,python2,python2-pip,python2-devel,automake,gcc,make,libpq-devel,libpq5,zlib,zlib-devel,libjpeg8,libjpeg-devel
-
+  * setup-x86_64.exe -q -P wget,nano,python2,python2-pip,python2-devel,automake,gcc,make,libpq-devel,libpq5,zlib,zlib-devel,libjpeg8,libjpeg-devel
   * Choose any Available Download Site and click Next
   * cygwin64 will automatically start installing dependencies of NetBox
 
@@ -70,3 +69,11 @@ netbox=>
   * cd /cygdrive/c/netbox/current
 * Install the required python modules
   * pip2 install -r requirements.txt
+
+## Configuration
+* Open Cygwin64 Terminal
+* Change to the "current" directory
+  * cd /cygdrive/c/netbox/current
+* Copy the example configuration file into place
+  * cp netbox/netbox/configuration.example.py netbox/netbox/configuration.py
+* Edit the new configuration file
