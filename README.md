@@ -76,4 +76,18 @@ netbox=>
   * cd /cygdrive/c/netbox/current
 * Copy the example configuration file into place
   * cp netbox/netbox/configuration.example.py netbox/netbox/configuration.py
-* Edit the new configuration file
+* Open configuration.py with your preferred editor and set the following variables: ALLOWED_HOSTS, DATABASE, SECRET_KEY - if you need help consult main NetBox docs
+
+## Run Database Migrations
+* Open Cygwin64 Terminal
+* Change to the "current/netbox" directory
+  * cd /cygdrive/c/netbox/current/netbox
+* Run the migrations
+  * ./manage.py migrate
+## Create a Super User
+`# ./manage.py createsuperuser
+Username: admin
+Email address: zorlin@gmail.com
+Password:
+Password (again):
+Superuser created successfully.`
