@@ -85,6 +85,7 @@ netbox=>
 * Run the migrations
   * ./manage.py migrate
 ## Create a Super User
+Create a super user account.
 ```
 # ./manage.py createsuperuser
 Username: admin
