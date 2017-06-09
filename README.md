@@ -22,12 +22,12 @@ Various reasons. I would like to eventually explore Bash on Windows and maybe po
 ## Installation
 * Download cygwin64 from https://cygwin.com/install.html
 * Run the cygwin64 installer, and keep it around for later usage
-** Install from Internet.
-** You can install it anywhere you want but for this guide we'll be using C:\cygwin64 (the default) and installing for All Users.
-** Leave Local Package Directory alone or change it. Up to you.
-** Click next a couple of times till the main installer window opens.
-** Choose Direct Connection unless you have a reason not to.
-** Pick whatever mirror you want and hit next.
+  * Install from Internet.
+  * You can install it anywhere you want but for this guide we'll be using C:\cygwin64 (the default) and installing for All Users.
+  * Leave Local Package Directory alone or change it. Up to you.
+  * Click next a couple of times till the main installer window opens.
+  * Choose Direct Connection unless you have a reason not to.
+  * Pick whatever mirror you want and hit next.
 
 ## Option A: Download a release
 
