@@ -17,6 +17,16 @@ Various reasons. I would like to eventually explore Bash on Windows and maybe po
 * Once the installer has finished downloading, run it. When prompted in the installer, set a nice superuser password you'll record or remember. Leave all other settings as defaults, but at the end do not choose to run Stack Builder at exit. Hit Finish.
 
 ## Database creation
+* Open pgAdmin 4 (Start Menu -> Programs -> PostgreSQL 9.6 -> pgAdmin 4 or just find it by typing in the Start Menu).
+* Expand Servers on the left, then double-click the single PostgreSQL 9.6 entry. Enter your superuser password from earlier.
+* Right click Login/Group Roles, then Create -> Login/Group Role...
+* Set Name to netbox, then click the Definition tab and set a password for it.
+* Click the Privileges tab and set "Can login?" to Yes.
+* Hit Save.
+* Right click Databases, then Create -> Database...
+* Set Name to netbox, then change Owner to the netbox user.
+* Hit Save.
+
 ## Test your connection
 
 # NetBox
