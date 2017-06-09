@@ -264,3 +264,6 @@ Before we proceed, we'll need to add a utility to cygwin called cygrunsrv.
 Now visit localhost:80 and check that everything works. If it does, congratulations! You have a full NetBox install running on Windows.
 
 (This should still be considered experimental. For example, nginx on Windows is only in beta! Still, enjoy.)
+
+Hopefully your browser now looks like this :)
+![A demon of NetBox on Windows in production mode](http://i.imgur.com/cGk0Xyb.png)
