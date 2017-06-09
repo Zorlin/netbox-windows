@@ -94,3 +94,37 @@ Password:
 Password (again):
 Superuser created successfully.`
 ```
+
+## Collect Static Files
+```
+# ./manage.py collectstatic --no-input
+
+You have requested to collect static files at the destination
+location as specified in your settings:
+
+    /opt/netbox/netbox/static
+
+This will overwrite existing files!
+Are you sure you want to do this?
+
+Type 'yes' to continue, or 'no' to cancel: yes
+```
+
+## Load Initial Data (Optional)
+Populate netbox with some initial example data. HIGHLY recommended.
+```
+# ./manage.py loaddata initial_data
+Installed 43 object(s) from 4 fixture(s)
+```
+
+## Test the Application
+```
+ ./manage.py runserver 0.0.0.0:8000 --insecure
+Performing system checks...
+
+System check identified no issues (0 silenced).
+June 09, 2017 - 08:54:45
+Django version 1.11.2, using settings 'netbox.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+```
