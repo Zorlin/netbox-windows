@@ -28,6 +28,14 @@ Various reasons. I would like to eventually explore Bash on Windows and maybe po
 * Hit Save.
 
 ## Test your connection
+* Open SQL Shell (psql)
+* Leave server as localhost (just hit enter)
+* Type "netbox" as the database
+* Leave port as 5432 (just hit enter)
+* Type "netbox" as the user
+* Enter your password
+* If successful, you should see a prompt like this:
+netbox=>
 
 # NetBox
 ## Installation
