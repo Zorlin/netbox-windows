@@ -44,12 +44,11 @@ netbox=>
 * Change directories to the place you just downloaded
   * eg: cd C:\Users\Zorlin\Downloads
 * Run the cygwin64 installer, asking it to install all required packages.
-  * setup-x86_64.exe -q -P wget,nano,python2,python2-pip,python2-devel,automake,gcc,make,libpq-devel,libpq5,zlib,zlib-devel,libjpeg8,libjpeg-devel
+  * setup-x86_64.exe -q -P wget,nano,python2,python2-pip,python2-devel,automake,gcc,gcc-g++,make,libpq-devel,libpq5,zlib,zlib-devel,libjpeg8,libjpeg-devel
   * Choose any Available Download Site and click Next
   * cygwin64 will automatically start installing dependencies of NetBox
 
 (Dev note: If you don't install libpq5, importing the psycopg2 module WILL NOT WORK with a really vague error)
-(Dev note: We may need gcc-g++ but so far not needed)
 ## Option A: Download a release
 * Open Cygwin64 Terminal
 * Create and then enter a directory
